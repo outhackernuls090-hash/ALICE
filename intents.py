@@ -1,14 +1,14 @@
 intents = [
-    {"tag": "greet", "patterns": ["hello", "hi", "hey", "good morning"], "action": "greet"},
-    {"tag": "protect", "patterns": ["danger", "attack", "enemy", "help"], "action": "protect"},
-    {"tag": "analyze_user", "patterns": ["who are you", "what are you doing", "analyze me"], "action": "analyze_user"},
-    {"tag": "ignore", "patterns": ["nothing", "leave me", "no action"], "action": "ignore"}
+    {"tag": "greet", "patterns": ["hello", "hi", "hey"], "action": "greet"},
+    {"tag": "help", "patterns": ["help", "assist"], "action": "protect"},
+    {"tag": "analyze", "patterns": ["why", "what", "how", "who"], "action": "analyze_user"},
+    {"tag": "ignore", "patterns": ["nothing", "leave"], "action": "ignore"},
 ]
 
 def get_action_from_input(user_input):
-    user_input_lower = user_input.lower()
+    text = user_input.lower()
     for intent in intents:
-        for pattern in intent["patterns"]:
-            if pattern in user_input_lower:
+        for p in intent["patterns"]:
+            if p in text:
                 return intent["action"]
     return "greet"

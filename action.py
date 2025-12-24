@@ -1,37 +1,31 @@
 responses = {
     "greet": {
-        "friendly": "Hello! It's always a pleasure to see you.",
+        "friendly": "Hey! It's great to see you.",
         "neutral": "Hello.",
-        "concerned": "Oh, hello… is everything alright?",
-        "aggressive": "What do you want?"
+        "concerned": "You seem different today…",
+        "aggressive": "What now?"
     },
     "protect": {
-        "friendly": "Don't worry, I will make sure you're safe!",
-        "neutral": "I will protect you.",
-        "concerned": "Attention! I must protect you!",
-        "aggressive": "No one will harm you while I am here!"
+        "friendly": "Don't worry, I'm here for you.",
+        "neutral": "I will assist.",
+        "concerned": "Something feels off… stay alert.",
+        "aggressive": "Nobody touches you while I'm around."
     },
     "analyze_user": {
-        "friendly": "I want to understand you better.",
+        "friendly": "Let me think about that.",
         "neutral": "Analyzing…",
-        "concerned": "Hmm… your data worries me.",
-        "aggressive": "I'm observing you carefully!"
+        "concerned": "This is complicated.",
+        "aggressive": "I'm looking very closely."
     },
     "ignore": {
-        "friendly": "Alright, I'll wait here quietly.",
+        "friendly": "Alright, take your time.",
         "neutral": "...",
-        "concerned": "I will keep watch just in case.",
-        "aggressive": "You will regret ignoring me!"
+        "concerned": "I'll stay nearby.",
+        "aggressive": "Hmph."
     }
 }
 
 def get_response(action, emotions, memory):
-    dominant_emotion = max(emotions, key=emotions.get)
-    base_response = responses.get(action, {}).get(dominant_emotion, "...")
-
-    # Memory einbeziehen: letzte passende Eingaben referenzieren
-    relevant_memories = [m for m in memory if m['action'] == action]
-    if relevant_memories:
-        last_input = relevant_memories[-1]['input']
-        return f"{base_response} (I remember you said: '{last_input}')"
-    return base_response
+    emotion = max(emotions, key=emotions.get)
+    base = responses.get(action, {}).get(emotion, "...")
+    return base
