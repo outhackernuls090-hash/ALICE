@@ -1,28 +1,14 @@
-# intents.py
-import re
+intents = [
+    {"tag": "greet", "patterns": ["hello", "hi", "hey", "good morning"], "action": "greet"},
+    {"tag": "protect", "patterns": ["danger", "attack", "enemy", "help"], "action": "protect"},
+    {"tag": "analyze_user", "patterns": ["who are you", "what are you doing", "analyze me"], "action": "analyze_user"},
+    {"tag": "ignore", "patterns": ["nothing", "leave me", "no action"], "action": "ignore"}
+]
 
-def detect_intent(user_input):
-    text = user_input.lower()
-
-    # Begrüßung
-    if re.search(r"\b(hello|hi|hey)\b", text):
-        return "greeting"
-
-    # Frage nach Alice
-    if re.search(r"\b(who are you|your name)\b", text):
-        return "ask_name"
-
-    # Frage nach User
-    if re.search(r"\b(who am i|my name)\b", text):
-        return "ask_user"
-
-    # Stimmung / Gefühle
-    if re.search(r"\b(happy|sad|angry|tired|good|bad)\b", text):
-        return "ask_feeling"
-
-    # Korrektur
-    if re.search(r"\b(no|actually|i mean)\b", text):
-        return "correction"
-
-    # Sonstiges / Default
-    return "default"
+def get_action_from_input(user_input):
+    user_input_lower = user_input.lower()
+    for intent in intents:
+        for pattern in intent["patterns"]:
+            if pattern in user_input_lower:
+                return intent["action"]
+    return "greet"
